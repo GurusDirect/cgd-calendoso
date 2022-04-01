@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
 import type { JWT } from "next-auth/jwt";
 
+import firstOrCreateUser from "./user";
+
 /**
  * Takes a token, and returns a new token with updated
  * `accessToken` and `accessTokenExpires`. If an error occurs,
@@ -50,11 +52,12 @@ const refreshAccessToken = async (token: JWT) => {
   }
 };
 
+// keycloak
 export default NextAuth({
   providers: [
     {
-      id: "keycloak",
-      name: "Keycloak",
+      id: "cloud-gurus",
+      name: "Cloud Gurus",
       type: "oauth",
       version: "2.0",
       params: { grant_type: "authorization_code" },
@@ -78,6 +81,9 @@ export default NextAuth({
   ],
   session: {
     jwt: true,
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET,
   },
   callbacks: {
     /**
@@ -115,6 +121,16 @@ export default NextAuth({
         session.user = token.user;
         session.error = token.error;
         session.accessToken = token.accessToken;
+        const user = await firstOrCreateUser(token.user);
+        const calendsoSession: Session = {
+          ...session,
+          user: {
+            ...user,
+            id: user.id as number,
+            username: user.username as string,
+          },
+        };
+        return calendsoSession;
       }
       return session;
     },
