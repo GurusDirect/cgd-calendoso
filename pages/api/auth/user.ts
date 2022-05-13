@@ -2,8 +2,8 @@ import prisma from "@lib/prisma";
 import slugify from "@lib/slugify";
 
 export default async function firstOrCreateUser(providerUser) {
-  const { email, given_name, family_name, email_verified } = providerUser;
-  const username = slugify(`${given_name} ${family_name}`);
+  const { email, given_name, family_name, email_verified, id } = providerUser;
+  const username = slugify(`${id}`);
   const userEmail = email.toLowerCase();
   const emailVerified = email_verified ? new Date(Date.now()) : null;
 
