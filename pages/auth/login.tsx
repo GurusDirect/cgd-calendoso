@@ -81,7 +81,7 @@ export default function Login({ csrfToken }) {
       )}
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <img className="h-6 mx-auto" src="/calendso-logo-white-word.svg" alt="Cal.com Logo" />
+        <img className="h-10 mx-auto" src="/cg-logo.png" alt="Cloud Gurus Logo" />
         <h2 className="mt-6 text-3xl font-bold text-center font-cal text-neutral-900">
           {t("sign_in_account")}
         </h2>

@@ -4,9 +4,9 @@ export default function Logo({ small }: { small?: boolean }) {
       <strong>
         <img
           className={small ? "h-4 w-auto" : "h-5 w-auto"}
-          alt="Cal"
-          title="Cal"
-          src="/calendso-logo-white-word.svg"
+          alt="Cloud Gurus Direct"
+          title="Cloud Gurus Direct"
+          src="/cg-logo.png"
         />
       </strong>
     </h1>
